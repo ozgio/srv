@@ -44,10 +44,8 @@ Examples:
 
 func runMirrorCmd(flags mirrorsCmdFlags, args []string) {
 
-	fmt.Printf("Request mirroring server running at %s://%s:%d with flags: %+v\n", defaultProtocol, "localhost", port, flags)
-
 	http.HandleFunc("/", mirrorHandlerFunc(flags.json))
-	err := server.ListenAndServe(port, certFile, keyFile, nil)
+	err := server.ListenAndServe(host, port, certFile, keyFile, nil)
 	if err != nil {
 		fmt.Printf("error: %s\n", err.Error())
 	}

@@ -46,8 +46,7 @@ func runCheckCmd(flags filesCmdFlags, args []string) {
 
 	root := http.Dir(rootPath)
 
-	fmt.Printf("Static file server running at %s://%s:%d\n", defaultProtocol, "localhost", port)
-	err = server.ListenAndServe(port, certFile, keyFile, http.FileServer(root))
+	err = server.ListenAndServe(host, port, certFile, keyFile, http.FileServer(root))
 	if err != nil {
 		fmt.Printf("Error: %v\n", err)
 	}
