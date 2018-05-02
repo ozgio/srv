@@ -8,11 +8,14 @@ const defaultServerPort = 8010
 const defaultProtocol = "http"
 const defaultHost = "127.0.0.1"
 
-//TODO create a rootFlags object
-var port int
-var certFile string
-var keyFile string
-var host string
+type rootCmdFlags struct {
+	port     int
+	certFile string
+	keyFile  string
+	host     string
+}
+
+var defaultRootCmdFlags rootCmdFlags
 
 func NewRootCommand() *cobra.Command {
 	cmd := &cobra.Command{
@@ -25,10 +28,10 @@ func NewRootCommand() *cobra.Command {
 
 func Execute() (*cobra.Command, error) {
 	rootCmd := NewRootCommand()
-	rootCmd.PersistentFlags().IntVarP(&port, "port", "p", defaultServerPort, "Port to listen")
-	rootCmd.PersistentFlags().StringVarP(&host, "host", "l", defaultHost, "Host name or address")
-	rootCmd.PersistentFlags().StringVarP(&certFile, "cert", "c", "", "Path to cert file for https server")
-	rootCmd.PersistentFlags().StringVarP(&keyFile, "key", "k", "", "Path to key file for https server")
+	rootCmd.PersistentFlags().IntVarP(&defaultRootCmdFlags.port, "port", "p", defaultServerPort, "Port to listen")
+	rootCmd.PersistentFlags().StringVarP(&defaultRootCmdFlags.host, "host", "l", defaultHost, "Host name or address")
+	rootCmd.PersistentFlags().StringVarP(&defaultRootCmdFlags.certFile, "cert", "c", "", "Path to cert file for https server")
+	rootCmd.PersistentFlags().StringVarP(&defaultRootCmdFlags.keyFile, "key", "k", "", "Path to key file for https server")
 
 	rootCmd.AddCommand(NewFilesCommand())
 	rootCmd.AddCommand(NewMirrorCommand())

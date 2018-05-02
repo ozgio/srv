@@ -33,8 +33,8 @@ Examples:
 }
 
 func runGenerateCmd(flags generateCmdFlags, args []string) {
-	keyFile := keyFile
-	certFile := certFile
+	keyFile := defaultRootCmdFlags.keyFile
+	certFile := defaultRootCmdFlags.certFile
 
 	if keyFile == "" {
 		keyFile = "key.pem"
@@ -56,7 +56,7 @@ func runGenerateCmd(flags generateCmdFlags, args []string) {
 	}
 
 	opts := tls.Options{
-		Host: host,
+		Host: defaultRootCmdFlags.host,
 	}
 
 	fmt.Printf("Generating files %s, %s with these options: %+v\n", keyFile, certFile, opts)
