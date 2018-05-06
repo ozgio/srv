@@ -29,7 +29,7 @@ func NewRootCommand() *cobra.Command {
 func Execute() (*cobra.Command, error) {
 	rootCmd := NewRootCommand()
 	rootCmd.PersistentFlags().IntVarP(&defaultRootCmdFlags.port, "port", "p", defaultServerPort, "Port to listen")
-	rootCmd.PersistentFlags().StringVarP(&defaultRootCmdFlags.host, "host", "l", defaultHost, "Host name or address")
+	rootCmd.PersistentFlags().StringVarP(&defaultRootCmdFlags.host, "host", "o", defaultHost, "Host name or address")
 	rootCmd.PersistentFlags().StringVarP(&defaultRootCmdFlags.certFile, "cert", "c", "", "Path to cert file for https server")
 	rootCmd.PersistentFlags().StringVarP(&defaultRootCmdFlags.keyFile, "key", "k", "", "Path to key file for https server")
 
