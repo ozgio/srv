@@ -15,6 +15,7 @@ type filesCmdFlags struct {
 	root string
 }
 
+// NewFilesCommand creates new "files" subcommand
 func NewFilesCommand() *cobra.Command {
 	var flags filesCmdFlags
 

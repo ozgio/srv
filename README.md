@@ -1,7 +1,7 @@
 srv
 ===
 
-srv is a http server for helping development. 
+"srv" is a http server for helping development. 
 
 Features:
 - static file server

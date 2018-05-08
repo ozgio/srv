@@ -1,13 +1,18 @@
+//Package cmd provides cobra commands
 package cmd
 
 import (
 	"github.com/spf13/cobra"
 )
 
-const defaultServerPort = 8010
-const defaultProtocol = "http"
-const defaultHost = "127.0.0.1"
+//defaults for flags
+const (
+	defaultServerPort = 8010
+	defaultProtocol   = "http"
+	defaultHost       = "127.0.0.1"
+)
 
+// rootCmdFlags represents cli flags for root command
 type rootCmdFlags struct {
 	port     int
 	certFile string
@@ -15,8 +20,10 @@ type rootCmdFlags struct {
 	host     string
 }
 
+//global varibale for accessing root flags (persistentFlags)
 var defaultRootCmdFlags rootCmdFlags
 
+//NewRootCommand creates a new Command as root.
 func NewRootCommand() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "srv",
@@ -26,6 +33,8 @@ func NewRootCommand() *cobra.Command {
 	return cmd
 }
 
+// Execute parses flags and runs commands. It is the starting point of the
+// application. Returns the command which is the root of all sub commands
 func Execute() (*cobra.Command, error) {
 	rootCmd := NewRootCommand()
 	rootCmd.PersistentFlags().IntVarP(&defaultRootCmdFlags.port, "port", "p", defaultServerPort, "Port to listen")

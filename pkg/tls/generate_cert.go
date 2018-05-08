@@ -7,6 +7,7 @@
 
 // modified by @ozgio to be used as a library
 
+//Package tls provides helpers
 package tls
 
 import (
@@ -27,6 +28,8 @@ import (
 	"strings"
 	"time"
 )
+
+var defaultOrganization = "Acme Co"
 
 func publicKey(priv interface{}) interface{} {
 	switch k := priv.(type) {
@@ -71,8 +74,9 @@ type Options struct {
 	ECDSACurve string
 }
 
-//GenerateCertToFiles generates key and cert and write them to the files
-//specified with parameters keyFile and certFile
+// GenerateCertToFiles generates key and cert using "GenerateCert" function,
+// then writes the content to the files specified with parameters keyFile and
+// certFile
 func GenerateCertToFiles(keyFile string, certFile string, opts Options) error {
 	keyOut, err := os.OpenFile(keyFile, os.O_WRONLY|os.O_CREATE|os.O_TRUNC, 0600)
 	if err != nil {
@@ -105,8 +109,11 @@ func GenerateCertToFiles(keyFile string, certFile string, opts Options) error {
 	return nil
 }
 
-//GenerateCert generates key.pem, cert.pem files and write them through io.Writer
-//interfaces
+// GenerateCert generates key.pem, cert.pem file contents and write them
+// through io.Writer interfaces.
+//
+// opts.Host is a required value. opts.validFor defaults to 1 year,
+// opts.RSABits defaults to 2048.
 func GenerateCert(certOut io.Writer, keyOut io.Writer, opts Options) error {
 	if opts.ValidFor == 0 {
 		opts.ValidFor = 365 * 24 * time.Hour
@@ -133,7 +140,7 @@ func GenerateCert(certOut io.Writer, keyOut io.Writer, opts Options) error {
 	case "P521":
 		priv, err = ecdsa.GenerateKey(elliptic.P521(), rand.Reader)
 	default:
-		return fmt.Errorf("Unrecognized elliptic curve: %q", opts.ECDSACurve)
+		return fmt.Errorf("unrecognized elliptic curve: %q", opts.ECDSACurve)
 	}
 	if err != nil {
 		return fmt.Errorf("failed to generate private key: %s", err.Error())
@@ -160,7 +167,7 @@ func GenerateCert(certOut io.Writer, keyOut io.Writer, opts Options) error {
 	template := x509.Certificate{
 		SerialNumber: serialNumber,
 		Subject: pkix.Name{
-			Organization: []string{"Acme Co"},
+			Organization: []string{defaultOrganization},
 		},
 		NotBefore: notBefore,
 		NotAfter:  notAfter,
@@ -190,11 +197,11 @@ func GenerateCert(certOut io.Writer, keyOut io.Writer, opts Options) error {
 	}
 
 	if err := pem.Encode(certOut, &pem.Block{Type: "CERTIFICATE", Bytes: derBytes}); err != nil {
-		return fmt.Errorf("failed to write data to cert file: %s", err)
+		return fmt.Errorf("cannot create pem content of cert file: %s", err)
 	}
 
 	if err := pem.Encode(keyOut, pemBlockForKey(priv)); err != nil {
-		return fmt.Errorf("failed to write data to key file: %s", err)
+		return fmt.Errorf("cannot create pem content of key file: %s", err)
 	}
 
 	return nil

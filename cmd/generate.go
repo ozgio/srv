@@ -11,6 +11,7 @@ import (
 type generateCmdFlags struct {
 }
 
+// NewGenerateCommand creates new "generate" subcommand
 func NewGenerateCommand() *cobra.Command {
 	var flags generateCmdFlags
 

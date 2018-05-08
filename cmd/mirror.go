@@ -13,12 +13,14 @@ import (
 	"github.com/spf13/cobra"
 )
 
-const defaultJsonEnabled = false
+//defaultJSONEnabled is the default value for --json flag
+const defaultJSONEnabled = false
 
 type mirrorsCmdFlags struct {
 	json bool
 }
 
+// NewMirrorCommand creates new mirror subcommand
 func NewMirrorCommand() *cobra.Command {
 	var flags mirrorsCmdFlags
 
@@ -37,7 +39,7 @@ Examples:
 		},
 	}
 
-	cmd.Flags().BoolVarP(&flags.json, "json", "j", defaultJsonEnabled, "Response format")
+	cmd.Flags().BoolVarP(&flags.json, "json", "j", defaultJSONEnabled, "Response format")
 
 	return cmd
 }

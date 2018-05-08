@@ -1,3 +1,4 @@
+//Package server provides http server related helpers
 package server
 
 import (
@@ -5,11 +6,12 @@ import (
 	"net/http"
 )
 
-// ListenAndServe starts http or https server based on parameters certFile and
-// keyFile
+// ListenAndServe starts http or https server based on parameters.
 //
-// Returns whether the server is https or not as bool and the error
-// http.ListenAndServer* returns
+// It defaults to https server (http.ListenAndServeTLS) but if certFile and
+// keyFile is both empty string it starts http server http.ListenAndServe.
+//
+// Returns whatever error http.ListenAndServer* returns
 func ListenAndServe(host string, port int, certFile, keyFile string, handler http.Handler) error {
 	addr := fmt.Sprintf("%s:%d", host, port)
 	var proto = "http"
