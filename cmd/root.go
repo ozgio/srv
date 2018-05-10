@@ -12,6 +12,8 @@ const (
 	defaultHost       = "127.0.0.1"
 )
 
+var version string
+
 // rootCmdFlags represents cli flags for root command
 type rootCmdFlags struct {
 	port     int
@@ -35,7 +37,9 @@ func NewRootCommand() *cobra.Command {
 
 // Execute parses flags and runs commands. It is the starting point of the
 // application. Returns the command which is the root of all sub commands
-func Execute() (*cobra.Command, error) {
+func Execute(ver string) (*cobra.Command, error) {
+	version = ver
+
 	rootCmd := NewRootCommand()
 	rootCmd.PersistentFlags().IntVarP(&defaultRootCmdFlags.port, "port", "p", defaultServerPort, "Port to listen")
 	rootCmd.PersistentFlags().StringVarP(&defaultRootCmdFlags.host, "host", "o", defaultHost, "Host name or address")
@@ -45,6 +49,7 @@ func Execute() (*cobra.Command, error) {
 	rootCmd.AddCommand(NewFilesCommand())
 	rootCmd.AddCommand(NewMirrorCommand())
 	rootCmd.AddCommand(NewGenerateCommand())
+	rootCmd.AddCommand(NewVersionCommand(version))
 
 	err := rootCmd.Execute()
 
