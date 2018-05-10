@@ -7,8 +7,8 @@ prints incoming requests.
 "srv" supports TLS (https) connections and comes with a self signed TLS cerificate
 generator based on [a generator](1) in golang respository
 
-Only tested on Linux but releases page have builds on much more system and 
-architecture go supports.
+Only tested on Linux but releases page have builds on different systems and 
+architectures that go supports.
 
 Note that this command should not be used in production.
 
@@ -93,8 +93,8 @@ Prints incoming request in plain text or json format
 
 ### srv generate
 
-Generates key and certs files for https server. Keep in mind that these are
-only meant for development. These file can be used with "srv files" or
+Generates key and cert files for https server. Keep in mind that these are
+only meant for development. These files can be used with "srv files" or
 "srv mirror" commands later
 
 #### Usage:

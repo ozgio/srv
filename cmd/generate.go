@@ -19,8 +19,8 @@ func NewGenerateCommand() *cobra.Command {
 		Use:   "generate",
 		Short: "Generates key and certs files for https server",
 		Long: `
-Generates key and certs files for https server. Keep in mind that these are 
-only meant for development. These file can be used with "srv files" or 
+Generates key and cert files for https server. Keep in mind that these are 
+only meant for development. These files can be used with "srv files" or 
 "srv mirror" commands later
 
 Examples:
