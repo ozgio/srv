@@ -1,1 +1,3 @@
 /vendor
+/bin
+/.goxc.local.json

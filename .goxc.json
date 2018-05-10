@@ -1,0 +1,13 @@
+{
+	"Tasks": [
+		"default",
+		"publish-github"
+	],
+	"TaskSettings": {
+		"publish-github": {
+			"owner": "ozgio",
+			"repository": "srv"
+		}
+	},
+	"ConfigVersion": "0.9"
+}
