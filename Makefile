@@ -7,13 +7,13 @@ release: check-ver clean
 clean:
 	rm -Rf bin
 
-test:
+test: 
 	go test -v ./...
 
 dep:
 	dep ensure
 		
-tools: 
+get-tools: 
 	go get -u github.com/golang/dep/cmd/dep
 	go get -u github.com/laher/goxc
 
