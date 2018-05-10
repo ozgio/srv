@@ -28,10 +28,13 @@ func NewMirrorCommand() *cobra.Command {
 		Use:   "mirror",
 		Short: "Prints incoming requests",
 		Long: `|
-Send request as response in text or json format
+Prints incoming request in plain text or json format
 
 Examples:
+	#start server
 	srv mirror
+
+	#json responses
 	srv mirror --port=80 --json
 `,
 		Run: func(cmd *cobra.Command, args []string) {

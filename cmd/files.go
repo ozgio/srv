@@ -22,12 +22,18 @@ func NewFilesCommand() *cobra.Command {
 	var cmd = &cobra.Command{
 		Use:   "files",
 		Short: "Static file server",
-		Long: `|
+		Long: `
 Static file server with directory listing
 
 Examples:
+	#serve the files at current working directory
 	srv files
+
+	#serve the files at ~/files using port 80
 	srv files --port=80 --root=~/files
+
+	#create https server using specified pem files
+	srv files --port=443 --cert=cert.pem --key=key.pem
 `,
 		Run: func(cmd *cobra.Command, args []string) {
 			runCheckCmd(flags, args)

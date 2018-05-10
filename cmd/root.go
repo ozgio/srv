@@ -29,8 +29,25 @@ var defaultRootCmdFlags rootCmdFlags
 func NewRootCommand() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "srv",
-		Short: "srv is a http server for helping development",
-		Long:  `http server for helping development`,
+		Short: "srv is a HTTP server for helping development",
+		Long: `
+HTTP server for helping development which can serve static files or prints
+incoming requests.
+
+srv supports TLS (https) connection and comes with a self signed TLS cerificate
+generator.
+
+Examples:
+	
+	#serve the files at current working directory on port 8010
+	srv files
+
+	#generate self-signed TLS certificates
+	srv generate --key=key.pem --cert=cert.pem
+
+	#static file server which supports https
+	srv files --port=443 --cert=cert.pem --key=key.pem
+`,
 	}
 	return cmd
 }

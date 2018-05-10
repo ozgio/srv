@@ -18,12 +18,16 @@ func NewGenerateCommand() *cobra.Command {
 	var cmd = &cobra.Command{
 		Use:   "generate",
 		Short: "Generates key and certs files for https server",
-		Long: `|
+		Long: `
 Generates key and certs files for https server. Keep in mind that these are 
-only meant for development.
+only meant for development. These file can be used with "srv files" or 
+"srv mirror" commands later
 
 Examples:
 	srv generate --key=key.pem --cert=cert.pem
+
+	#create https server using generated certificate
+	srv files --cert=cert.pem --key=key.pem
 `,
 		Run: func(cmd *cobra.Command, args []string) {
 			runGenerateCmd(flags, args)
