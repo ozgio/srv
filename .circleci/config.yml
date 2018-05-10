@@ -1,0 +1,21 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/golang:1.9
+    working_directory: /go/src/github.com/ozgio/srv
+    steps:
+      - checkout
+      - run: make get-tools
+      - run: make dep
+      - run: make test
+  release:
+    docker:
+      - image: circleci/golang:1.9
+    working_directory: /go/src/github.com/ozgio/srv
+    steps:
+      - checkout
+      - run: make get-tools
+      - run: make dep
+      - run: make test
+      - run: make release ver=$CIRCLE_TAG ghtoken=$GITHUB_TOKEN

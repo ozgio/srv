@@ -23,4 +23,10 @@ check-ver:
 		exit 1; \
 	fi
 
+ci-validate:
+	circleci config validate -c .circleci/config.yml
+
+ci-build:
+	circleci build
+
 .PHONY: release clean test dep tools check-ver
