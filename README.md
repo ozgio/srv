@@ -1,6 +1,8 @@
 srv
 ===
 
+[![CircleCI](https://circleci.com/gh/ozgio/srv.svg?style=svg)](https://circleci.com/gh/ozgio/srv)
+
 "srv" is an HTTP server for helping development which can serve static files or 
 prints incoming requests.
 
