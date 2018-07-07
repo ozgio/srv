@@ -19,3 +19,14 @@ jobs:
       - run: make dep
       - run: make test
       - run: make release ver=$CIRCLE_TAG ghtoken=$GITHUB_TOKEN
+
+workflows:
+  version: 2
+  tag-release:
+    jobs:
+      - release:
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /^v.*/
